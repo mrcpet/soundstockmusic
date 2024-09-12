@@ -48,7 +48,7 @@ export async function POST(req) {
   } catch (error) {
     return NextResponse.json(
       {
-        error: error.message,
+        error: "An account with this email already exists.",
       },
       {
         status: 400,

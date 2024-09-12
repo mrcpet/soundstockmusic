@@ -12,27 +12,27 @@ export async function GET(req) {
   const category = url.searchParams.get("category");
   const quantity = url.searchParams.get("quantity");
   let items = [];
+  const filters = {};
+
   if (category) {
-    items = await prisma.item.findMany({
-      where: {
-        category: {
-          equals: category,
-          mode: "insensitive",
-        },
-      },
-    });
-  } else if (quantity === "true") {
-    console.log("Received quantity param:", quantity);
-    items = await prisma.item.findMany({
-      where: {
-        quantity: {
-          gt: 0,
-        },
-      },
-    });
-  } else {
-    items = await prisma.item.findMany();
+    filters.category = {
+      equals: category,
+      mode: "insensitive",
+    };
   }
+
+  if (quantity === "true") {
+    filters.quantity = {
+      gt: 0,
+    };
+  }
+
+  items = await prisma.item.findMany({
+    where: {
+      AND: [filters],
+    },
+  });
+
   return NextResponse.json(items);
 }
 

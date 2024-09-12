@@ -15,18 +15,6 @@ function ItemContainer() {
   const [error, setError] = useState("");
   const [editingItem, setEditingItem] = useState(null);
 
-  // useEffect(() => {
-  //   async function fetchItems() {
-  //     try {
-  //       const response = await fetch("http://localhost:3000/api/items/");
-  //       const data = await response.json();
-  //       setItems(data);
-  //     } catch (error) {
-  //       setError("Failed to get items");
-  //     }
-  //   }
-  //   fetchItems();
-  // }, []);
   const fetchItems = async (filters = {}) => {
     try {
       const queryParams = new URLSearchParams(filters).toString();

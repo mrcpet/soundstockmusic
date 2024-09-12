@@ -40,7 +40,8 @@ function AuthForm() {
       router.push("/items");
       return;
     }
-    setError("Invalid login credentials");
+    const data = await response.json();
+    setError(data.error);
   }
 
   return (
