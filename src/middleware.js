@@ -40,5 +40,6 @@ export const config = {
     "/api/items/:path*",
     "/api/users/:path*",
     "/api/users/",
+    "/api/auth/verify",
   ],
 };

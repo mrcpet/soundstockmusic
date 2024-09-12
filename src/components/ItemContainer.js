@@ -107,7 +107,7 @@ function ItemContainer() {
           item.id === updatedItem.id ? updatedItem : item
         )
       );
-      setEditingItem(null); // Clear editingItem
+      setEditingItem(null); 
     } else {
       setError("Failed to update item");
     }

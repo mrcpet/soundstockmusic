@@ -33,8 +33,6 @@ export async function POST(req) {
       },
     });
 
-    console.log("User registered: ", newUser);
-
     const token = await signJWT({
       userId: newUser.id,
     });

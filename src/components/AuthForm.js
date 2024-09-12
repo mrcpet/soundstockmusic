@@ -35,7 +35,6 @@ function AuthForm() {
       const data = await response.json();
       console.log("DATA", data);
       localStorage.setItem("@library/token", data.token);
-      localStorage.setItem("@library/userName", data.user.name);
       auth.setToken(data.token);
       router.push("/items");
       return;

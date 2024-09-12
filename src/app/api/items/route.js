@@ -8,7 +8,6 @@ const prisma = new PrismaClient();
 
 export async function GET(req) {
   const url = new URL(req.url);
-  const search = url.searchParams.get("search");
   const category = url.searchParams.get("category");
   const quantity = url.searchParams.get("quantity");
   let items = [];

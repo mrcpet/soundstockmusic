@@ -1,5 +1,6 @@
 "use client";
 
+import { sendStatusCode } from "next/dist/server/api-utils";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const defaultState = {
@@ -21,10 +22,29 @@ function AuthProvider({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      verify();
+    }
+  }, [token]);
+
   function logout() {
     localStorage.removeItem("@library/token");
     localStorage.removeItem("@library/userName");
     setToken(null);
+  }
+
+  async function verify() {
+    const response = await fetch("/api/auth/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearar ${token}`,
+      },
+    });
+    if (!response.ok) {
+      logout();
+    }
   }
 
   return (
